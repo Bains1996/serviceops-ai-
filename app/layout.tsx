@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "ServiceOps AI | Approval-First AI for Trucking Carriers",
     description:
@@ -33,12 +40,25 @@ export const metadata: Metadata = {
     siteName: "ServiceOps AI",
     locale: "en_CA",
     type: "website",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "ServiceOps AI - AI-Powered Dispatch for Trucking",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ServiceOps AI | Approval-First AI for Trucking Carriers",
     description:
       "Operational AI for dispatch exceptions, approvals, and billing readiness.",
+    images: ["/og-image.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
