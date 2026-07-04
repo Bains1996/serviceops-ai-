@@ -9,17 +9,15 @@ export function SiteFooter() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
               SO
             </span>
-            <span className="text-sm font-semibold tracking-tight text-[var(--text-primary)]">
-              ServiceOps AI
-            </span>
+            <span className="heading-md text-[var(--text)]">ServiceOps AI</span>
           </div>
-          <p className="max-w-xs text-sm text-[var(--text-secondary)] leading-6">
-            AI-powered dispatch and operations platform for trucking carriers. Run dispatch 24/7,
-            resolve exceptions faster, keep every action auditable.
+          <p className="body-md mt-4 max-w-xs text-[var(--text-secondary)]">
+            AI-powered dispatch and operations platform for trucking carriers.
+            Run dispatch 24/7, resolve exceptions faster, keep every action auditable.
           </p>
         </div>
 
-        <div className="footer-col">
+        <div>
           <h4>Product</h4>
           <ul>
             <li><Link href="/solutions">Solutions</Link></li>
@@ -30,7 +28,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div className="footer-col">
+        <div>
           <h4>Company</h4>
           <ul>
             <li><Link href="/case-studies">Case Studies</Link></li>
@@ -39,7 +37,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div className="footer-col">
+        <div>
           <h4>Legal</h4>
           <ul>
             <li><Link href="/privacy">Privacy</Link></li>
@@ -47,12 +45,13 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-5 pt-8 md:px-8">
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 md:flex-row">
-          <p className="text-sm text-[var(--text-muted)]">
-            &copy; {new Date().getFullYear()} ServiceOps AI. All rights reserved.
+
+      <div className="mx-auto max-w-[var(--page-max)] pt-8 mt-8" style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="caption text-[var(--text-muted)]">
+            © {new Date().getFullYear()} ServiceOps AI. All rights reserved.
           </p>
-          <p className="text-sm text-[var(--text-muted)]">
+          <p className="caption text-[var(--text-muted)]">
             Built for trucking carriers across North America.
           </p>
         </div>
