@@ -53,19 +53,19 @@ export default function ModulesPage() {
       <article className="section-frame rounded-3xl p-6 md:p-8">
         <h3 className="text-2xl font-semibold">Operator outcomes this stack is designed to improve</h3>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-[var(--line)] p-4">
+          <div className="rounded-xl border border-[var(--border)] p-4">
             <p className="text-xs text-subtle">Dispatcher workload</p>
             <p className="mt-2 text-3xl font-semibold text-[var(--accent)]">-25%</p>
           </div>
-          <div className="rounded-xl border border-[var(--line)] p-4">
+          <div className="rounded-xl border border-[var(--border)] p-4">
             <p className="text-xs text-subtle">Missed windows</p>
             <p className="mt-2 text-3xl font-semibold text-[var(--accent)]">-20%</p>
           </div>
-          <div className="rounded-xl border border-[var(--line)] p-4">
+          <div className="rounded-xl border border-[var(--border)] p-4">
             <p className="text-xs text-subtle">POD-to-invoice cycle</p>
             <p className="mt-2 text-3xl font-semibold text-[var(--accent)]">-30%</p>
           </div>
-          <div className="rounded-xl border border-[var(--line)] p-4">
+          <div className="rounded-xl border border-[var(--border)] p-4">
             <p className="text-xs text-subtle">Overnight churn</p>
             <p className="mt-2 text-3xl font-semibold text-[var(--accent)]">-33%</p>
           </div>

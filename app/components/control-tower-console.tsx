@@ -350,7 +350,7 @@ export function ControlTowerConsole() {
 
       {/* Map Section */}
       <div className="section-frame overflow-hidden rounded-3xl">
-        <div className="relative h-[300px] bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--surface)]">
+        <div className="relative h-[300px] bg-gradient-to-br from-[var(--bg-warm)] to-[var(--surface)]">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10">
@@ -403,7 +403,7 @@ export function ControlTowerConsole() {
                   key={driver.id}
                   onClick={() => setSelectedDriver(driver.id)}
                   className={`w-full rounded-xl border px-3 py-3 text-left ${
-                    selected?.id === driver.id ? "border-[var(--accent)] bg-[var(--accent-soft)]" : "border-[var(--line)]"
+                    selected?.id === driver.id ? "border-[var(--accent)] bg-[var(--accent-soft)]" : "border-[var(--border)]"
                   }`}
                 >
                   <p className="text-sm font-semibold">{driver.name}</p>
@@ -415,7 +415,7 @@ export function ControlTowerConsole() {
               ))}
             </div>
 
-            <div className="rounded-2xl border border-[var(--line)] p-4">
+            <div className="rounded-2xl border border-[var(--border)] p-4">
               <p className="text-xs uppercase tracking-[0.12em] text-subtle">Simulate incoming driver text</p>
               <p className="mt-2 text-sm text-subtle">Selected driver: {selected?.name}</p>
               {typeof selected?.lat === "number" && typeof selected?.lng === "number" && (
@@ -425,7 +425,7 @@ export function ControlTowerConsole() {
                 value={messageText}
                 onChange={(event) => setMessageText(event.target.value)}
                 rows={4}
-                className="mt-3 w-full rounded-xl border border-[var(--line)] bg-transparent px-3 py-2 text-sm outline-none"
+                className="mt-3 w-full rounded-xl border border-[var(--border)] bg-transparent px-3 py-2 text-sm outline-none"
                 placeholder="Type driver message"
               />
               <div className="mt-2 flex flex-wrap gap-2">
@@ -463,7 +463,7 @@ export function ControlTowerConsole() {
           </div>
           <div className="mt-4 space-y-3">
             {state.approvals.length === 0 && (
-              <div className="rounded-xl border border-[var(--line)] p-4 text-center text-sm text-subtle">
+              <div className="rounded-xl border border-[var(--border)] p-4 text-center text-sm text-subtle">
                 <svg className="mx-auto mb-2 h-8 w-8 text-[var(--accent-emerald)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -474,7 +474,7 @@ export function ControlTowerConsole() {
               <div key={item.id} className={`rounded-xl border p-4 transition-all ${
                 item.status === "PENDING" 
                   ? "border-[var(--warning)]/30 bg-[var(--warning)]/5" 
-                  : "border-[var(--line)]"
+                  : "border-[var(--border)]"
               }`}>
                 <div className="flex items-start justify-between">
                   <div>
@@ -528,7 +528,7 @@ export function ControlTowerConsole() {
         <h2 className="text-xl font-semibold">Event Pipeline</h2>
         <div className="mt-4 max-h-[260px] space-y-2 overflow-auto pr-1">
           {events.map((event) => (
-            <div key={event.id} className="rounded-xl border border-[var(--line)] p-3">
+            <div key={event.id} className="rounded-xl border border-[var(--border)] p-3">
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold">{event.source} • {event.eventType}</p>
                 <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${event.status === "PROCESSED" ? "bg-emerald-500/15 text-emerald-300" : event.status === "FAILED" ? "bg-rose-500/15 text-rose-300" : "bg-amber-500/15 text-amber-300"}`}>
@@ -541,7 +541,7 @@ export function ControlTowerConsole() {
             </div>
           ))}
           {events.length === 0 && (
-            <div className="rounded-xl border border-[var(--line)] p-3 text-sm text-subtle">No dispatch events recorded yet.</div>
+            <div className="rounded-xl border border-[var(--border)] p-3 text-sm text-subtle">No dispatch events recorded yet.</div>
           )}
         </div>
       </section>
@@ -550,7 +550,7 @@ export function ControlTowerConsole() {
         <h2 className="text-xl font-semibold">Worker Queue</h2>
         <div className="mt-4 max-h-[240px] space-y-2 overflow-auto pr-1">
           {jobs.map((job) => (
-            <div key={job.id} className="rounded-xl border border-[var(--line)] p-3">
+            <div key={job.id} className="rounded-xl border border-[var(--border)] p-3">
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold">{job.jobType}</p>
                 <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${job.status === "COMPLETED" ? "bg-emerald-500/15 text-emerald-300" : job.status === "FAILED" ? "bg-rose-500/15 text-rose-300" : job.status === "PROCESSING" ? "bg-sky-500/15 text-sky-300" : "bg-amber-500/15 text-amber-300"}`}>
@@ -562,7 +562,7 @@ export function ControlTowerConsole() {
             </div>
           ))}
           {jobs.length === 0 && (
-            <div className="rounded-xl border border-[var(--line)] p-3 text-sm text-subtle">No queued background jobs yet.</div>
+            <div className="rounded-xl border border-[var(--border)] p-3 text-sm text-subtle">No queued background jobs yet.</div>
           )}
         </div>
       </section>
@@ -572,7 +572,7 @@ export function ControlTowerConsole() {
           <h2 className="text-xl font-semibold">Load Board</h2>
           <div className="mt-4 space-y-2">
             {state.loads.map((load) => (
-              <div key={load.id} className="rounded-xl border border-[var(--line)] p-3">
+              <div key={load.id} className="rounded-xl border border-[var(--border)] p-3">
                 <p className="text-sm font-semibold">{load.id} • {load.customer}</p>
                 <p className="mt-1 text-xs text-subtle">{load.origin} {"->"} {load.destination}</p>
                 <p className="mt-1 text-xs text-subtle">Rate CAD {load.rateCad} • Deadhead {load.deadheadMiles} mi • {load.status}</p>
@@ -585,7 +585,7 @@ export function ControlTowerConsole() {
           <h2 className="text-xl font-semibold">Live Timeline</h2>
           <div className="mt-4 max-h-[380px] space-y-2 overflow-auto pr-1">
             {state.timeline.map((item) => (
-              <div key={item.id} className="rounded-xl border border-[var(--line)] p-3">
+              <div key={item.id} className="rounded-xl border border-[var(--border)] p-3">
                 <p className="text-sm font-semibold">{item.title}</p>
                 <p className="mt-1 text-xs text-subtle">{item.actor} • {new Date(item.at).toLocaleString()}</p>
                 <p className="mt-2 text-sm">{item.detail}</p>
@@ -599,7 +599,7 @@ export function ControlTowerConsole() {
         <h2 className="text-xl font-semibold">Outbound Driver Messages</h2>
         <div className="mt-4 max-h-[240px] space-y-2 overflow-auto pr-1">
           {state.outbound.map((msg) => (
-            <div key={msg.id} className="rounded-xl border border-[var(--line)] p-3">
+            <div key={msg.id} className="rounded-xl border border-[var(--border)] p-3">
               <p className="text-xs text-subtle">{msg.to} • {new Date(msg.at).toLocaleString()}</p>
               <p className="mt-1 text-sm">{msg.body}</p>
             </div>

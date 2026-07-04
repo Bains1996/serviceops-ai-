@@ -119,7 +119,7 @@ export default function BookDemoPage() {
               value={form.fullName}
               onChange={(event) => update("fullName", event.target.value)}
               placeholder="Full name"
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
               required
             />
             <input
@@ -127,27 +127,27 @@ export default function BookDemoPage() {
               value={form.workEmail}
               onChange={(event) => update("workEmail", event.target.value)}
               placeholder="Work email"
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
               required
             />
             <input
               value={form.company}
               onChange={(event) => update("company", event.target.value)}
               placeholder="Company"
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
               required
             />
             <input
               value={form.role}
               onChange={(event) => update("role", event.target.value)}
               placeholder="Role (Ops Manager, Dispatch Director, etc.)"
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
               required
             />
             <select
               value={form.fleetSize}
               onChange={(event) => update("fleetSize", event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
             >
               <option value="">Fleet size</option>
               <option value="1-25">1-25 trucks</option>
@@ -160,12 +160,12 @@ export default function BookDemoPage() {
               onChange={(event) => update("systemsToConnect", event.target.value)}
               placeholder="Systems to connect (McLeod, Trimble, Samsara, Motive, DAT, Truckstop, QuickBooks, etc.)"
               rows={3}
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
             />
             <select
               value={form.autonomyGoal}
               onChange={(event) => update("autonomyGoal", event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
             >
               <option value="">Autonomy goal</option>
               <option value="assist">Assist mode (all approvals by dispatcher)</option>
@@ -177,7 +177,7 @@ export default function BookDemoPage() {
               onChange={(event) => update("primaryPain", event.target.value)}
               placeholder="Primary pain point (exceptions, missed windows, billing delays, etc.)"
               rows={4}
-              className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
             />
             <input
               value={form.website}
@@ -194,7 +194,7 @@ export default function BookDemoPage() {
             disabled={submitting}
             className={`mt-5 rounded-full px-6 py-3 text-sm font-semibold ${
               submitting
-                ? "cursor-not-allowed border border-[var(--line)] text-subtle"
+                ? "cursor-not-allowed border border-[var(--border)] text-subtle"
                 : "bg-[var(--accent)] text-[#032d26]"
             }`}
           >
@@ -214,7 +214,7 @@ export default function BookDemoPage() {
             <li>5. Rollout plan for dispatch, ops, and back-office teams.</li>
           </ol>
 
-          <div className="mt-6 rounded-2xl border border-[var(--line)] p-4">
+          <div className="mt-6 rounded-2xl border border-[var(--border)] p-4">
             <p className="text-xs uppercase tracking-[0.14em] text-subtle">Pilot target outcomes</p>
             <ul className="mt-3 space-y-2 text-sm">
               <li>-25% dispatcher manual workload</li>

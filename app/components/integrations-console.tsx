@@ -174,12 +174,12 @@ export function IntegrationsConsole() {
             value={form.companyName}
             onChange={(event) => update("companyName", event.target.value)}
             placeholder="Carrier company name"
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           />
           <select
             value={form.countryRegion}
             onChange={(event) => update("countryRegion", event.target.value)}
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           >
             <option value="Canada">Canada</option>
             <option value="USA">USA</option>
@@ -189,25 +189,25 @@ export function IntegrationsConsole() {
             value={form.tms}
             onChange={(event) => update("tms", event.target.value)}
             placeholder="TMS (McLeod, Trimble TMW, Turvo, etc.)"
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           />
           <input
             value={form.eld}
             onChange={(event) => update("eld", event.target.value)}
             placeholder="ELD/Telematics (Samsara, Motive, Geotab, etc.)"
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           />
           <input
             value={form.loadBoard}
             onChange={(event) => update("loadBoard", event.target.value)}
             placeholder="Load source (DAT, Truckstop, broker API, EDI)"
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           />
           <input
             value={form.billing}
             onChange={(event) => update("billing", event.target.value)}
             placeholder="Billing stack (QuickBooks, Sage, ERP, etc.)"
-            className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
           />
         </div>
 
@@ -223,29 +223,29 @@ export function IntegrationsConsole() {
           <button
             onClick={sendTestSync}
             disabled={!hasCredentials || testing}
-            className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
+            className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
           >
             {testing ? "Syncing..." : "Send Live Test Sync"}
           </button>
         </div>
 
         {credentials && (
-          <div className="mt-5 rounded-2xl border border-[var(--line)] p-4 text-sm">
+          <div className="mt-5 rounded-2xl border border-[var(--border)] p-4 text-sm">
             <p className="font-semibold">Generated credentials (save now)</p>
             <p className="mt-2 text-subtle">Company ID: {credentials.companyId}</p>
             <p className="text-subtle break-all">API Key: {credentials.apiKey}</p>
             <p className="mt-3 text-subtle">Integration endpoint: {credentials.integrationEndpoint}</p>
             <p className="text-subtle">Headers:</p>
-            <pre className="mt-2 overflow-auto rounded-lg border border-[var(--line)] p-3 text-xs text-subtle">{sampleHeaders}</pre>
+            <pre className="mt-2 overflow-auto rounded-lg border border-[var(--border)] p-3 text-xs text-subtle">{sampleHeaders}</pre>
           </div>
         )}
 
         {testResult?.state && (
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-            <div className="rounded-xl border border-[var(--line)] p-3">Drivers: {testResult.state.drivers.length}</div>
-            <div className="rounded-xl border border-[var(--line)] p-3">Loads: {testResult.state.loads.length}</div>
-            <div className="rounded-xl border border-[var(--line)] p-3">Approvals: {testResult.state.approvals.length}</div>
-            <div className="rounded-xl border border-[var(--line)] p-3">Outbound: {testResult.state.outbound.length}</div>
+            <div className="rounded-xl border border-[var(--border)] p-3">Drivers: {testResult.state.drivers.length}</div>
+            <div className="rounded-xl border border-[var(--border)] p-3">Loads: {testResult.state.loads.length}</div>
+            <div className="rounded-xl border border-[var(--border)] p-3">Approvals: {testResult.state.approvals.length}</div>
+            <div className="rounded-xl border border-[var(--border)] p-3">Outbound: {testResult.state.outbound.length}</div>
           </div>
         )}
 
@@ -257,10 +257,10 @@ export function IntegrationsConsole() {
         <h3 className="text-xl font-semibold">Connected Carriers (Current Runtime)</h3>
         <div className="mt-4 space-y-2 text-sm">
           {connections.length === 0 && (
-            <div className="rounded-xl border border-[var(--line)] p-3 text-subtle">No carrier integrations created yet.</div>
+            <div className="rounded-xl border border-[var(--border)] p-3 text-subtle">No carrier integrations created yet.</div>
           )}
           {connections.map((item) => (
-            <div key={item.companyId} className="rounded-xl border border-[var(--line)] p-3">
+            <div key={item.companyId} className="rounded-xl border border-[var(--border)] p-3">
               <p className="font-semibold">{item.companyName}</p>
               <p className="text-subtle">{item.countryRegion} · {item.companyId}</p>
               <p className="text-subtle">Last event: {item.lastEventAt ? new Date(item.lastEventAt).toLocaleString() : "Not yet"}</p>

@@ -15,7 +15,7 @@ export function SitePage({
   children: ReactNode;
 }) {
   return (
-    <div data-theme="dark" className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)]">
+    <div className="min-h-screen bg-[var(--bg)]">
       <SiteNav />
       <main className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
         <section className="section-frame rounded-3xl p-6 md:p-10">

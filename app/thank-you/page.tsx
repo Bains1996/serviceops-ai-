@@ -19,7 +19,7 @@ export default function ThankYouPage() {
           <li>3. Pilot KPI baseline and rollout proposal.</li>
         </ol>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/" className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold">
+          <Link href="/" className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold">
             Back to Home
           </Link>
           <Link href="/case-studies" className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#032d26]">

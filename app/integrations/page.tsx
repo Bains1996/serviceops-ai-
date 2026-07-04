@@ -47,19 +47,19 @@ export default function IntegrationsPage() {
       <article className="section-frame rounded-3xl p-6 md:p-8">
         <h3 className="display-type text-3xl leading-tight md:text-4xl">How one-time integration works</h3>
         <ol className="mt-5 grid gap-3 text-sm md:grid-cols-2">
-          <li className="rounded-xl border border-[var(--line)] p-4">1. Connect your systems (API, EDI, SFTP, or webhook).</li>
-          <li className="rounded-xl border border-[var(--line)] p-4">2. Sync drivers, tractors, loads, and active dispatch records.</li>
-          <li className="rounded-xl border border-[var(--line)] p-4">3. Route live updates into the control tower in real time.</li>
-          <li className="rounded-xl border border-[var(--line)] p-4">4. Start in supervised mode, then increase autonomy by policy.</li>
-          <li className="rounded-xl border border-[var(--line)] p-4">5. Let the 24/7 agent manage check-calls and assignment actions.</li>
-          <li className="rounded-xl border border-[var(--line)] p-4">6. Keep every decision auditable with role-based controls.</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">1. Connect your systems (API, EDI, SFTP, or webhook).</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">2. Sync drivers, tractors, loads, and active dispatch records.</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">3. Route live updates into the control tower in real time.</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">4. Start in supervised mode, then increase autonomy by policy.</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">5. Let the 24/7 agent manage check-calls and assignment actions.</li>
+          <li className="rounded-xl border border-[var(--border)] p-4">6. Keep every decision auditable with role-based controls.</li>
         </ol>
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/book-demo" className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#032d26]">
             Start Integration Pilot
           </Link>
-          <Link href="/control-tower" className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold">
+          <Link href="/control-tower" className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold">
             Open Control Tower
           </Link>
         </div>

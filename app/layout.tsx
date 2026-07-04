@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Fraunces, Inter, Manrope } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -68,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${fraunces.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} ${manrope.variable} ${fraunces.variable} h-full`}>
       <body className="min-h-full flex flex-col">
         {gaId && (
           <>

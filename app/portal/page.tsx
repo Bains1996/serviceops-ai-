@@ -65,12 +65,12 @@ export default function PortalPage() {
           <div className="mt-5 grid gap-3">
             {mode === "register" && (
               <>
-                <input value={form.companyId} onChange={(event) => setForm((prev) => ({ ...prev, companyId: event.target.value }))} placeholder="Company ID (from onboarding)" className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none" />
-                <input value={form.fullName} onChange={(event) => setForm((prev) => ({ ...prev, fullName: event.target.value }))} placeholder="Full name" className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none" />
+                <input value={form.companyId} onChange={(event) => setForm((prev) => ({ ...prev, companyId: event.target.value }))} placeholder="Company ID (from onboarding)" className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none" />
+                <input value={form.fullName} onChange={(event) => setForm((prev) => ({ ...prev, fullName: event.target.value }))} placeholder="Full name" className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none" />
               </>
             )}
-            <input value={form.email} onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))} placeholder="Work email" className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none" />
-            <input type="password" value={form.password} onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))} placeholder="Password" className="rounded-xl border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm outline-none" />
+            <input value={form.email} onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))} placeholder="Work email" className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none" />
+            <input type="password" value={form.password} onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))} placeholder="Password" className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none" />
             <button onClick={submit} className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#032d26]">{mode === "login" ? "Sign In" : "Create Operator Account"}</button>
             {mode === "register" && <p className="text-xs text-subtle">Use the carrier company ID generated during integration setup.</p>}
             {status && <p className="text-sm text-subtle">{status}</p>}
@@ -90,7 +90,7 @@ export default function PortalPage() {
               <Link href="/control-tower" className="mt-4 inline-flex rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#032d26]">
                 Open Control Tower
               </Link>
-              <button onClick={logout} className="mt-4 rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.12em]">Sign Out</button>
+              <button onClick={logout} className="mt-4 rounded-full border border-[var(--border)] px-4 py-2 text-xs uppercase tracking-[0.12em]">Sign Out</button>
             </div>
           )}
         </section>
