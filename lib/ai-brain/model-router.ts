@@ -80,6 +80,10 @@ export function getFailoverChain(complexity: TaskComplexity): ModelConfig[] {
   return FAILOVER_CHAINS[complexity].map((id) => MODELS[id]).filter(Boolean);
 }
 
+export function getModelById(id: string): ModelConfig | undefined {
+  return MODELS[id];
+}
+
 export function estimateCost(model: ModelConfig, inputTokens: number, outputTokens: number): number {
   return (inputTokens / 1_000_000) * model.costPer1MInput + (outputTokens / 1_000_000) * model.costPer1MOutput;
 }

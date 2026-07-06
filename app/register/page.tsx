@@ -48,7 +48,7 @@ export default function RegisterPage() {
         <div style={{ maxWidth: "520px", margin: "0 auto" }}>
           <div className="text-center" style={{ marginBottom: "40px" }}>
             <p className="eyebrow" style={{ marginBottom: "16px" }}>Start Free Trial</p>
-            <h1 className="display-2">Get started in 2 minutes</h1>
+            <h1 className="display-2">Get started in 20 minutes</h1>
             <p className="body-lg" style={{ marginTop: "12px", color: "var(--text-secondary)" }}>
               $49/truck/month. All features included. 30 days free. No credit card required.
             </p>

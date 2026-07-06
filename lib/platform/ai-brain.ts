@@ -1,7 +1,7 @@
 import { DispatchState } from "@/lib/dispatch-agent/types";
 import { AgentType, AgentEvent, OrchestrationResult } from "@/lib/dispatch-agent/agents/types";
 import { orchestrateAgents, executeSingleAgent, getAgentInfo, getAgentMemory } from "@/lib/dispatch-agent/agents/orchestrator";
-import { classifyTask, getModelForTask } from "@/lib/ai-brain/model-router";
+import { classifyTask, getModelForTask, getModelById, estimateCost } from "@/lib/ai-brain/model-router";
 import { callWithFailover } from "@/lib/ai-brain/failover";
 
 type AIBrainProvider = "OPENROUTER" | "OPENAI" | "ANTHROPIC";
@@ -215,7 +215,9 @@ export async function generateAIBrainGuidance(input: {
     try {
       const result = await callWithFailover(complexity, systemMsg, prompt, apiKey);
       raw = result.content;
-      console.log(`[AIBrain] Model: ${result.model} | Complexity: ${complexity} | Cost: $${((result.inputTokens * 0.15 + result.outputTokens * 0.60) / 1_000_000).toFixed(6)}`);
+      const modelConfig = getModelById(result.model);
+      const cost = modelConfig ? estimateCost(modelConfig, result.inputTokens, result.outputTokens) : 0;
+      console.log(`[AIBrain] Model: ${result.model} | Complexity: ${complexity} | Cost: $${cost.toFixed(6)}`);
     } catch {
       // Failover exhausted — return null (rule-based only)
       return null;

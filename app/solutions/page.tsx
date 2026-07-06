@@ -100,8 +100,8 @@ export default function SolutionsPage() {
             <Link href="/register" className="btn btn-primary" style={{ padding: "16px 36px" }}>
               Start Free Trial
             </Link>
-            <Link href="/demo" className="btn btn-secondary" style={{ padding: "16px 36px" }}>
-              See Live Demo
+            <Link href="/book-demo" className="btn btn-secondary" style={{ padding: "16px 36px" }}>
+              Book a Demo
             </Link>
           </div>
         </section>

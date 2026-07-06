@@ -78,9 +78,9 @@ export default function ModulesPage() {
         {/* Header */}
         <section style={{ padding: "var(--space-4xl) var(--page-margin) var(--space-2xl)", maxWidth: "var(--page-max)", margin: "0 auto", textAlign: "center" }}>
           <p className="eyebrow" style={{ marginBottom: "16px" }}>Platform</p>
-          <h1 className="display-1">9 modules. One platform.</h1>
+          <h1 className="display-1">6 AI agents. 3 platform features.</h1>
           <p className="body-lg" style={{ marginTop: "16px", color: "var(--text-secondary)", maxWidth: "560px", margin: "16px auto 0" }}>
-            Every module works together. No integrations needed. No per-seat fees. Just $49/truck/month.
+            Every feature works together. All integrations included. No per-seat fees. Just $49/truck/month.
           </p>
         </section>
 
@@ -133,14 +133,14 @@ export default function ModulesPage() {
         <section style={{ padding: "var(--space-4xl) var(--page-margin)", textAlign: "center" }}>
           <h2 className="display-2">See it in action</h2>
           <p className="body-lg" style={{ marginTop: "12px", color: "var(--text-secondary)", maxWidth: "480px", margin: "12px auto 0" }}>
-            30-day free trial. All 9 modules included. No credit card required.
+            30-day free trial. All features included. No credit card required.
           </p>
           <div style={{ marginTop: "32px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/register" className="btn btn-primary" style={{ padding: "16px 36px" }}>
               Start Free Trial
             </Link>
-            <Link href="/demo" className="btn btn-secondary" style={{ padding: "16px 36px" }}>
-              See Live Demo
+            <Link href="/book-demo" className="btn btn-secondary" style={{ padding: "16px 36px" }}>
+              Book a Demo
             </Link>
           </div>
         </section>
