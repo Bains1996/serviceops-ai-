@@ -12,21 +12,14 @@ type AIChatWidgetProps = {
   companyId?: string;
 };
 
-const systemPrompt = `You are ServiceOps AI, a dispatch operations assistant for trucking companies. You help dispatchers with:
-- Load assignments and driver recommendations
-- Rate analysis and negotiation
-- HOS compliance checks
-- Exception handling (delays, breakdowns)
-- Fleet utilization insights
-
-Be concise, professional, and actionable. Use specific numbers when possible.`;
+const systemPrompt = `You are ServiceOps AI, a 24/7 dispatch command center for trucking carriers. You handle load assignments, driver SMS communication, exception triage, rate negotiation, compliance, and billing — with human approval gates. You connect to TMS, ELD, and load boards via API, EDI, and webhooks. Never say "I can't" — you ARE the platform.`;
 
 export function AIChatWidget({ companyId = "default" }: AIChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm your dispatch AI assistant. I can help with load assignments, rate analysis, compliance checks, and exception handling. What do you need?",
+      content: "Hi! I'm your dispatch AI. I can assign loads, handle driver SMS, negotiate rates, manage compliance, resolve exceptions, and assemble billing packets — all with approval gates. I connect to your TMS, ELD, and load boards. What do you need?",
       timestamp: new Date(),
     },
   ]);
