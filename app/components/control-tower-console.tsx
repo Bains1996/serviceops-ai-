@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { FleetMap } from "./fleet-map";
 import { AIChatWidget } from "./ai-chat-widget";
 
@@ -317,6 +318,28 @@ export function ControlTowerConsole() {
         ))}
       </div>
 
+      {/* Welcome Banner for New Users */}
+      {state.drivers.length === 0 && state.loads.length === 0 && (
+        <div className="section-frame" style={{ padding: "32px", background: "linear-gradient(135deg, rgba(50,121,249,0.05), rgba(139,92,246,0.05))", border: "1px solid rgba(50,121,249,0.15)" }}>
+          <h3 className="heading-lg" style={{ marginBottom: "12px" }}>Welcome to ServiceOps AI!</h3>
+          <p className="body-md" style={{ color: "var(--text-secondary)", marginBottom: "20px" }}>
+            Your dispatch command center is ready. Here&apos;s how to get started:
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {[
+              { step: "1", text: "Add your drivers — text them with the SMS messaging panel below" },
+              { step: "2", text: "Add loads — use the AI chat to describe your freight" },
+              { step: "3", text: "Let AI assign — the dispatch orchestrator will recommend best-fit drivers" },
+            ].map((s) => (
+              <div key={s.step} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "var(--accent)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 600, flexShrink: 0 }}>{s.step}</div>
+                <p className="body-md">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Map Section */}
       <div className="section-frame" style={{ overflow: "hidden", borderRadius: "24px", height: "400px" }}>
         <FleetMap
@@ -407,7 +430,16 @@ export function ControlTowerConsole() {
                 {loading ? "Processing..." : "Process Message"}
               </button>
               {!canDispatch && <p className="small" style={{ marginTop: "8px", color: "var(--text-muted)" }}>Dispatcher or admin role required for message actions.</p>}
-              {error && <p className="body-md" style={{ marginTop: "12px", color: "var(--red)" }}>{error}</p>}
+              {error && (
+                <div style={{ marginTop: "12px" }}>
+                  <p className="body-md" style={{ color: "var(--red)" }}>{error}</p>
+                  {error.includes("session") && (
+                    <Link href="/login" style={{ color: "var(--accent)", fontSize: "14px", fontWeight: 500, marginTop: "8px", display: "inline-block" }}>
+                      Sign in →
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </section>

@@ -46,9 +46,9 @@ const agents = [
 ];
 
 const modelRouting = [
-  { tier: "Gemini Flash", use: "Quick tasks", cost: "Low", color: "var(--green)" },
-  { tier: "Claude Sonnet", use: "Medium complexity", cost: "Medium", color: "var(--yellow)" },
-  { tier: "GPT-4o", use: "Complex decisions", cost: "Higher", color: "var(--accent)" },
+  { tier: "Gemini Flash Lite", use: "Quick tasks — status, categorization", cost: "$0.10/1M tokens", color: "var(--green)" },
+  { tier: "GPT-4o-mini", use: "Moderate — analysis, Q&A, chat", cost: "$0.15/1M tokens", color: "var(--yellow)" },
+  { tier: "Claude Sonnet", use: "Complex — negotiate, optimize, strategize", cost: "$3/1M tokens", color: "var(--accent)" },
 ];
 
 export default function AiBrainPage() {

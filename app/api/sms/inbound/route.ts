@@ -75,6 +75,6 @@ export async function POST(request: Request) {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to process inbound SMS.";
     if (eventId) await markDispatchEventFailed(eventId, message);
-    return new Response("error", { status: 500 });
+    return new Response("", { status: 200 });
   }
 }

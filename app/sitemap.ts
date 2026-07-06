@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://serviceops.ai";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://serviceops-ai-site.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/solutions", "/integrations", "/modules", "/case-studies", "/book-demo", "/thank-you"];

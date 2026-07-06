@@ -9,8 +9,30 @@ type RegisterPayload = {
   password: string;
 };
 
+// Simple in-memory rate limiter: max 5 registrations per IP per 15 minutes
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+  if (record.count >= RATE_LIMIT_MAX) return false;
+  record.count++;
+  return true;
+}
+
 export async function POST(request: Request) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json({ ok: false, message: "Too many attempts. Please try again later." }, { status: 429 });
+    }
+
     const payload = (await request.json()) as RegisterPayload;
     if (!payload.companyId || !payload.fullName || !payload.email || !payload.password) {
       return NextResponse.json({ ok: false, message: "companyId, fullName, email, and password are required." }, { status: 400 });
