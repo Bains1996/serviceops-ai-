@@ -3,267 +3,296 @@
 import Link from "next/link";
 import { SiteNav } from "../components/site-nav";
 import { SiteFooter } from "../components/site-footer";
+import { MouseParallax } from "../components/mouse-parallax";
+import { ScrollReveal } from "../components/scroll-reveal";
 
 const features = [
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
       </svg>
     ),
-    title: "Current Load",
-    desc: "View your active load, pickup/delivery details, and time windows at a glance.",
+    title: "Load Board",
+    desc: "View all available loads, sort by rate, lane, and equipment type. Accept with one click.",
   },
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
     ),
-    title: "POD Camera",
-    desc: "Take photos of proof of delivery, bills of lading, and cargo condition.",
+    title: "Driver Messaging",
+    desc: "Send and receive text messages from drivers. AI parses replies and updates load status automatically.",
   },
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    title: "AI Dispatcher",
-    desc: "Chat with your AI assistant for load updates, directions, and support.",
+    title: "AI Chat",
+    desc: "Ask your AI dispatcher anything. Load status, driver availability, rate calculations — instant answers.",
   },
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    title: "GPS Tracking",
-    desc: "Automatic location updates so dispatch always knows where you are.",
+    title: "Approval Queue",
+    desc: "Review AI recommendations. Approve load assignments, rate negotiations, and exception resolutions.",
   },
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: "Hours of Service",
-    desc: "Track driving hours and get reminders before your HOS limits.",
+    title: "Event Timeline",
+    desc: "See every action in real-time. Load assignments, driver messages, exceptions — all logged and searchable.",
   },
   {
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
     ),
-    title: "Push Notifications",
-    desc: "Get instant alerts for new loads, route changes, and dispatch messages.",
+    title: "Analytics Dashboard",
+    desc: "Revenue per mile, empty miles, delivery performance, driver utilization — all at a glance.",
   },
 ];
 
 export default function DownloadPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg)]">
+    <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <SiteNav />
 
-      {/* Hero */}
-      <section className="px-5 pt-24 pb-20 md:px-8 md:pt-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <p className="text-sm font-medium text-[var(--accent)]">Download ServiceOps AI</p>
-                <h1 className="display-type text-4xl md:text-6xl">
+      <MouseParallax />
+
+{/* Hero — Full-screen background */}
+       <section
+         className="fullscreen-bg"
+         style={{
+           '--bg-image': "url('https://images.unsplash.com/photo-1616432043562-3671ea2e5242?w=1920&q=95')",
+           backgroundSize: "cover",
+           backgroundPosition: "center",
+           minHeight: "100vh",
+         } as React.CSSProperties}
+       >
+        <ScrollReveal>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "120px 24px 80px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: "16px", color: "rgba(255,255,255,0.7)", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>Try ServiceOps AI</p>
+                <h1 style={{
+                  fontSize: "clamp(36px, 5vw, 56px)",
+                  fontWeight: "700",
+                  lineHeight: "1.08",
+                  color: "#fff",
+                  textShadow: "0 2px 30px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3)",
+                  letterSpacing: "-1px",
+                  marginBottom: "20px",
+                }}>
                   Your dispatch center.
                   <br />
-                  In your pocket.
+                  In your browser.
                 </h1>
-                <p className="max-w-lg text-lg text-[var(--text-secondary)]">
-                  The Command Center runs in your browser. The mobile app puts AI-powered dispatch
-                  in your drivers' hands. One system, every device.
+                <p style={{
+                  fontSize: "18px",
+                  lineHeight: "1.6",
+                  color: "rgba(255,255,255,0.85)",
+                  textShadow: "0 1px 6px rgba(0,0,0,0.3)",
+                  maxWidth: "480px",
+                }}>
+                  The Command Center runs in your browser. Manage loads, message drivers, and let AI handle dispatch — all from one tab. No install required.
                 </p>
-              </div>
-
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link href="#" className="btn-primary inline-flex items-center justify-center gap-3">
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-wider opacity-80">Get it on</div>
-                    <div className="text-sm font-semibold">Google Play</div>
-                  </div>
-                </Link>
-                <Link href="#" className="btn-secondary inline-flex items-center justify-center gap-3">
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-wider opacity-80">Download on the</div>
-                    <div className="text-sm font-semibold">App Store</div>
-                  </div>
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-6 text-sm text-[var(--text-secondary)]">
-                <div className="flex items-center gap-2">
-                  <svg className="h-5 w-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Free for drivers
+                <div style={{ marginTop: "28px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  <Link href="/register" className="btn btn-primary" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    Start Free Trial
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-outline" style={{ display: "flex", alignItems: "center", gap: "8px", borderColor: "rgba(255,255,255,0.4)", color: "#fff" }}>
+                    Book a Demo
+                  </Link>
                 </div>
-                <div className="flex items-center gap-2">
-                  <svg className="h-5 w-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Works offline
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Mockup */}
-            <div className="relative mx-auto">
-              <div className="relative w-72 rounded-[3rem] border-4 border-[var(--border)] bg-white p-3 shadow-xl">
-                <div className="rounded-[2.5rem] bg-gradient-to-br from-[var(--accent-soft)] to-white p-5">
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="text-xs font-semibold">9:41</span>
-                    <div className="flex gap-1">
-                      <div className="h-2 w-2 rounded-full bg-[var(--accent)]" />
-                      <div className="h-2 w-2 rounded-full bg-[var(--accent)]/50" />
-                      <div className="h-2 w-2 rounded-full bg-[var(--accent)]/30" />
-                    </div>
+                <div style={{ marginTop: "24px", display: "flex", gap: "24px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.8)" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span style={{ color: "rgba(255,255,255,0.85)", fontSize: "15px" }}>$49/truck/month</span>
                   </div>
-                  <div className="space-y-4">
-                    <div className="text-center">
-                      <p className="text-xs text-[var(--text-muted)]">Good Morning</p>
-                      <p className="text-lg font-semibold">Dispatch Center</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="rounded-xl bg-white p-3 text-center shadow-sm">
-                        <p className="text-2xl font-bold text-[var(--accent)]">12</p>
-                        <p className="text-[10px] text-[var(--text-muted)]">Active Loads</p>
-                      </div>
-                      <div className="rounded-xl bg-white p-3 text-center shadow-sm">
-                        <p className="text-2xl font-bold text-[var(--success)]">8</p>
-                        <p className="text-[10px] text-[var(--text-muted)]">Delivered</p>
-                      </div>
-                    </div>
-                    <div className="rounded-xl bg-white p-3 shadow-sm">
-                      <div className="mb-2 flex items-center justify-between">
-                        <span className="rounded bg-[var(--accent-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--accent)]">LD-042</span>
-                        <span className="rounded bg-[var(--success)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--success)]">In Transit</span>
-                      </div>
-                      <p className="text-xs font-medium">Vancouver → Kelowna</p>
-                      <p className="text-[10px] text-[var(--text-muted)]">Raj Singh • $1,200</p>
-                    </div>
-                    <div className="rounded-xl bg-white p-3 shadow-sm">
-                      <div className="mb-2 flex items-center gap-2">
-                        <div className="h-5 w-5 rounded-full bg-[var(--accent-soft)]" />
-                        <span className="text-[10px] font-semibold">AI Dispatcher</span>
-                      </div>
-                      <p className="text-[10px] text-[var(--text-muted)]">"Pickup confirmed. Proceed to dock 3."</p>
-                    </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.8)" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span style={{ color: "rgba(255,255,255,0.85)", fontSize: "15px" }}>30-day free trial</span>
                   </div>
                 </div>
               </div>
-              <div className="absolute -right-6 top-12 rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-bold text-white shadow-lg">
-                AI Online
-              </div>
-              <div className="absolute -left-6 bottom-20 rounded-full bg-[var(--success)] px-4 py-2 text-xs font-bold text-white shadow-lg">
-                GPS Active
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <MouseParallax floatDepth={0.3}>
+                  <div data-float className="phone-frame">
+                    <div className="phone-screen" style={{ padding: "20px" }}>
+                      <div style={{ textAlign: "center", marginBottom: "16px" }}>
+                        <p className="small" style={{ color: "var(--text-muted)" }}>Good Morning</p>
+                        <p className="heading-md">Dispatch Center</p>
+                      </div>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
+                        <div style={{ background: "white", borderRadius: "12px", padding: "12px", textAlign: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                          <p style={{ fontSize: "24px", fontWeight: "500", color: "var(--accent)" }}>12</p>
+                          <p className="small" style={{ color: "var(--text-muted)" }}>Active Loads</p>
+                        </div>
+                        <div style={{ background: "white", borderRadius: "12px", padding: "12px", textAlign: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                          <p style={{ fontSize: "24px", fontWeight: "500", color: "var(--green)" }}>8</p>
+                          <p className="small" style={{ color: "var(--text-muted)" }}>Delivered</p>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                        <div style={{ background: "white", borderRadius: "12px", padding: "12px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
+                            <span style={{ background: "var(--accent-soft)", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: "600", color: "var(--accent)" }}>LD-042</span>
+                            <span style={{ background: "rgba(52,168,83,0.1)", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: "600", color: "var(--green)" }}>In Transit</span>
+                          </div>
+                          <p className="small" style={{ fontWeight: "500" }}>Vancouver &rarr; Kelowna</p>
+                          <p className="small" style={{ color: "var(--text-muted)" }}>Raj Singh &bull; $1,200</p>
+                        </div>
+                        <div style={{ background: "white", borderRadius: "12px", padding: "12px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                            <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--accent-soft)" }} />
+                            <span className="small" style={{ fontWeight: "500" }}>AI Dispatcher</span>
+                          </div>
+                          <p className="small" style={{ color: "var(--text-muted)" }}>&quot;Pickup confirmed. Proceed to dock 3.&quot;</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </MouseParallax>
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
-      <div className="divider" />
+      {/* Features — Full-screen background sections */}
+      <section>
+        <ScrollReveal>
+          <div style={{ maxWidth: "768px", margin: "0 auto", padding: "80px 24px 40px", textAlign: "center" }}>
+            <p className="eyebrow" style={{ marginBottom: "12px" }}>Command Center Features</p>
+            <h2 className="display-1">
+              Everything dispatch needs.
+              <br />
+              Nothing they don&apos;t.
+            </h2>
+            <p className="body-lg" style={{ marginTop: "16px", color: "var(--text-secondary)" }}>
+              Built for trucking carriers. Designed for the real world of freight operations.
+            </p>
+          </div>
+        </ScrollReveal>
 
-      {/* Features */}
-      <section className="section">
-        <div className="mb-12 max-w-3xl">
-          <p className="mb-3 text-sm font-medium text-[var(--accent)]">Driver Features</p>
-          <h2 className="display-type text-3xl md:text-5xl">
-            Everything drivers need.
-            <br />
-            Nothing they don't.
-          </h2>
-          <p className="mt-4 text-lg text-[var(--text-secondary)]">
-            Built by a former truck driver. Designed for the real world of long-haul freight.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <div key={f.title} className="card">
-              <div className="feature-icon bg-[var(--accent-soft)] text-[var(--accent)]">{f.icon}</div>
-              <h3 className="mb-2 text-lg font-semibold">{f.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-6">{f.desc}</p>
-            </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", padding: "0 var(--page-margin)" }}>
+          {features.map((f, i) => (
+            <ScrollReveal key={f.title} delay={i * 0.08}>
+              <MouseParallax floatDepth={0.12}>
+                <div data-float className="card hover-lift" style={{ padding: "28px" }}>
+                  <div className="icon-circle" style={{ marginBottom: "16px" }}>{f.icon}</div>
+                  <h3 className="heading-lg" style={{ marginBottom: "8px" }}>{f.title}</h3>
+                  <p className="body-md" style={{ color: "var(--text-secondary)" }}>{f.desc}</p>
+                </div>
+              </MouseParallax>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <div className="divider" />
-
-      {/* Desktop Section */}
-      <section className="section">
-        <div className="card-flat overflow-hidden p-8 md:p-12">
-          <div className="grid gap-8 md:grid-cols-2 md:items-center">
-            <div>
-              <p className="mb-3 text-sm font-medium text-[var(--accent)]">Command Center</p>
-              <h2 className="display-type text-3xl md:text-4xl">
-                The desktop experience.
-                <br />
-                In your browser.
-              </h2>
-              <p className="mt-4 text-[var(--text-secondary)]">
-                No install required. Bookmark it and it works just like an app.
-                Real-time maps, multi-load management, AI assistant, and approval workflows — all in one tab.
-              </p>
-              <div className="mt-6">
-                <Link href="/control-tower" className="btn-primary inline-flex items-center gap-2">
-                  Open Command Center
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
+{/* Desktop Section — Full-screen background */}
+       <section
+         className="fullscreen-bg"
+         style={{
+           '--bg-image': "url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=95')",
+           backgroundSize: "cover",
+           backgroundPosition: "center",
+           minHeight: "80vh",
+         } as React.CSSProperties}
+       >
+        <ScrollReveal>
+          <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "80px 24px" }}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "48px",
+              alignItems: "center",
+              padding: "48px",
+              borderRadius: "var(--radius-lg)",
+              background: "rgba(255,255,255,0.06)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: "12px", color: "rgba(255,255,255,0.7)", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>Command Center</p>
+                <h2 style={{
+                  fontSize: "clamp(28px, 3.5vw, 40px)",
+                  fontWeight: "700",
+                  lineHeight: "1.1",
+                  color: "#fff",
+                  textShadow: "0 2px 16px rgba(0,0,0,0.3)",
+                  letterSpacing: "-0.5px",
+                  marginBottom: "16px",
+                }}>
+                  The desktop experience.
+                  <br />
+                  In your browser.
+                </h2>
+                <p style={{
+                  fontSize: "17px",
+                  lineHeight: "1.6",
+                  color: "rgba(255,255,255,0.8)",
+                  textShadow: "0 1px 4px rgba(0,0,0,0.2)",
+                  marginBottom: "24px",
+                }}>
+                  No install required. Bookmark it and it works just like an app.
+                  Load board, AI recommendations, and approval workflows — all in one tab.
+                </p>
+                <Link href="/control-tower" className="btn btn-primary">Open Command Center</Link>
               </div>
-            </div>
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-lg">
-              <div className="mb-3 flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-[var(--error)]" />
-                <div className="h-3 w-3 rounded-full bg-[var(--warning)]" />
-                <div className="h-3 w-3 rounded-full bg-[var(--success)]" />
-                <span className="ml-2 text-xs text-[var(--text-muted)]">serviceops.ai/control-tower</span>
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="h-16 rounded-lg bg-[var(--bg)]" />
-                ))}
-              </div>
-              <div className="mt-2 h-24 rounded-lg bg-[var(--bg)]" />
+              <MouseParallax floatDepth={0.2}>
+                <div data-float className="browser-frame" style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
+                  <div className="browser-bar" style={{ background: "rgba(255,255,255,0.08)" }}>
+                    <div className="browser-dot" style={{ background: "var(--red)" }} />
+                    <div className="browser-dot" style={{ background: "var(--yellow)" }} />
+                    <div className="browser-dot" style={{ background: "var(--green)" }} />
+                  </div>
+                  <div className="browser-content" style={{ background: "var(--grey-10)", minHeight: "200px" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px" }}>
+                      {Array.from({ length: 8 }).map((_, i) => (
+                        <div key={i} style={{ height: "60px", borderRadius: "8px", background: "white", border: "1px solid var(--border)" }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </MouseParallax>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* CTA */}
-      <section className="section-lg">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="display-type text-3xl md:text-5xl">
-            Ready to dispatch smarter?
-          </h2>
-          <p className="mt-6 text-lg text-[var(--text-secondary)]">
-            Download the app or book a demo to see ServiceOps AI in action.
-          </p>
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/book-demo" className="btn-primary">Book a Demo</Link>
-            <Link href="#" className="btn-secondary">Download Free</Link>
+      <section className="section-hero">
+        <ScrollReveal>
+          <div className="text-center" style={{ maxWidth: "700px", margin: "0 auto" }}>
+            <h2 className="display-0">Ready to dispatch smarter?</h2>
+            <p className="body-lg" style={{ marginTop: "24px", color: "var(--text-secondary)" }}>
+              Start your free trial or book a demo to see ServiceOps AI in action.
+            </p>
+            <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "40px", flexWrap: "wrap" }}>
+              <Link href="/register" className="btn btn-primary btn-lg">Start Free Trial</Link>
+              <Link href="/book-demo" className="btn btn-outline btn-lg">Book a Demo</Link>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <SiteFooter />

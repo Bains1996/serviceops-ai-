@@ -9,6 +9,7 @@ import { enqueueDispatchJob } from "@/lib/platform/job-store";
 import { authorizeOperatorRequest } from "@/lib/platform/operator-authorization";
 import { DriverMessageInput } from "@/lib/dispatch-agent/types";
 import { getCompanyState, getDefaultCompanyId, saveCompanyState } from "@/lib/platform/tenant-state-store";
+import { runAgenticBrain } from "@/lib/platform/ai-brain";
 
 function getCompanyId(request: Request) {
   return request.headers.get("x-company-id")?.trim() || null;
@@ -47,18 +48,48 @@ export async function POST(request: Request) {
       await saveCompanyState(companyId, state);
     }
 
+    // Run agentic AI brain on the updated state
+    const agenticResult = await runAgenticBrain({
+      companyId,
+      state,
+      event: { type: "DRIVER_MESSAGE", driverId: payload.driverId, message: payload.text },
+    });
+
     const outboundToSend = state.outbound.filter((item) => !beforeIds.has(item.id));
     await Promise.all(outboundToSend.map((item) => sendSms(item.to, item.body)));
 
     await enqueueDispatchJob({
       companyId,
       jobType: "POST_EVENT_AUTOMATION",
-      payload: { eventId, source: "OPS_MESSAGE", driverId: payload.driverId },
+      payload: {
+        eventId,
+        source: "OPS_MESSAGE",
+        driverId: payload.driverId,
+        agenticResult: {
+          summary: agenticResult.orchestration.summary,
+          agentActions: agenticResult.orchestration.agents.flatMap((a) => a.actions.length),
+          aiGuidance: agenticResult.aiGuidance,
+        },
+      },
     });
 
     if (eventId) await markDispatchEventProcessed(eventId);
 
-    return NextResponse.json({ ok: true, companyId, state });
+    return NextResponse.json({
+      ok: true,
+      companyId,
+      state,
+      agenticBrain: {
+        summary: agenticResult.orchestration.summary,
+        agents: agenticResult.orchestration.agents.map((a) => ({
+          type: a.agentType,
+          status: a.status,
+          actionsCount: a.actions.length,
+          reasoning: a.reasoning,
+        })),
+        aiGuidance: agenticResult.aiGuidance,
+      },
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to process message.";
     if (eventId) await markDispatchEventFailed(eventId, message);

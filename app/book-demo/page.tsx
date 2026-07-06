@@ -68,9 +68,7 @@ export default function BookDemoPage() {
     try {
       const response = await fetch("/api/demo", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -111,15 +109,15 @@ export default function BookDemoPage() {
       title="See ServiceOps AI on your real trucking operations workflow."
       description="Share your current dispatch and billing pain points, and we will map a focused pilot with measurable outcomes."
     >
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <form onSubmit={onSubmit} className="section-frame rounded-3xl p-6 md:p-8">
-          <h2 className="text-2xl font-semibold">Request a Demo</h2>
-          <div className="mt-5 grid gap-3">
+      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "24px" }}>
+        <form onSubmit={onSubmit} className="section-frame" style={{ padding: "32px" }}>
+          <h2 className="heading-lg">Request a Demo</h2>
+          <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <input
               value={form.fullName}
               onChange={(event) => update("fullName", event.target.value)}
               placeholder="Full name"
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-input"
               required
             />
             <input
@@ -127,27 +125,27 @@ export default function BookDemoPage() {
               value={form.workEmail}
               onChange={(event) => update("workEmail", event.target.value)}
               placeholder="Work email"
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-input"
               required
             />
             <input
               value={form.company}
               onChange={(event) => update("company", event.target.value)}
               placeholder="Company"
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-input"
               required
             />
             <input
               value={form.role}
               onChange={(event) => update("role", event.target.value)}
               placeholder="Role (Ops Manager, Dispatch Director, etc.)"
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-input"
               required
             />
             <select
               value={form.fleetSize}
               onChange={(event) => update("fleetSize", event.target.value)}
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-select"
             >
               <option value="">Fleet size</option>
               <option value="1-25">1-25 trucks</option>
@@ -160,12 +158,12 @@ export default function BookDemoPage() {
               onChange={(event) => update("systemsToConnect", event.target.value)}
               placeholder="Systems to connect (McLeod, Trimble, Samsara, Motive, DAT, Truckstop, QuickBooks, etc.)"
               rows={3}
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-textarea"
             />
             <select
               value={form.autonomyGoal}
               onChange={(event) => update("autonomyGoal", event.target.value)}
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-select"
             >
               <option value="">Autonomy goal</option>
               <option value="assist">Assist mode (all approvals by dispatcher)</option>
@@ -177,14 +175,14 @@ export default function BookDemoPage() {
               onChange={(event) => update("primaryPain", event.target.value)}
               placeholder="Primary pain point (exceptions, missed windows, billing delays, etc.)"
               rows={4}
-              className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+              className="form-textarea"
             />
             <input
               value={form.website}
               onChange={(event) => update("website", event.target.value)}
               tabIndex={-1}
               autoComplete="off"
-              className="hidden"
+              style={{ display: "none" }}
               aria-hidden="true"
             />
           </div>
@@ -192,34 +190,35 @@ export default function BookDemoPage() {
           <button
             type="submit"
             disabled={submitting}
-            className={`mt-5 rounded-full px-6 py-3 text-sm font-semibold ${
-              submitting
-                ? "cursor-not-allowed border border-[var(--border)] text-subtle"
-                : "bg-[var(--accent)] text-[#032d26]"
-            }`}
+            className={`btn ${submitting ? "btn-outline" : "btn-primary"}`}
+            style={{ marginTop: "20px" }}
           >
             {submitting ? "Submitting..." : "Submit Demo Request"}
           </button>
 
-          {error && <p className="mt-4 text-sm text-rose-300">{error}</p>}
+          {error && <p className="body-md" style={{ marginTop: "16px", color: "var(--red)" }}>{error}</p>}
         </form>
 
-        <aside className="section-frame rounded-3xl p-6 md:p-8">
-          <h3 className="text-2xl font-semibold">What happens next</h3>
-          <ol className="mt-4 space-y-2 text-sm leading-7 text-subtle">
-            <li>1. 30-minute workflow review with your operations lead.</li>
-            <li>2. One-time system connectivity map (TMS, ELD, load feeds, billing stack).</li>
-            <li>3. KPI baseline setup for dispatch and billing cycle metrics.</li>
-            <li>4. Pilot scope proposal with approval controls and timeline.</li>
-            <li>5. Rollout plan for dispatch, ops, and back-office teams.</li>
+        <aside className="section-frame" style={{ padding: "32px" }}>
+          <h3 className="heading-lg">What happens next</h3>
+          <ol style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "8px" }}>
+            {[
+              "30-minute workflow review with your operations lead.",
+              "One-time system connectivity map (TMS, ELD, load feeds, billing stack).",
+              "KPI baseline setup for dispatch and billing cycle metrics.",
+              "Pilot scope proposal with approval controls and timeline.",
+              "Rollout plan for dispatch, ops, and back-office teams.",
+            ].map((step, i) => (
+              <li key={step} className="body-md" style={{ color: "var(--text-secondary)" }}>{i + 1}. {step}</li>
+            ))}
           </ol>
 
-          <div className="mt-6 rounded-2xl border border-[var(--border)] p-4">
-            <p className="text-xs uppercase tracking-[0.14em] text-subtle">Pilot target outcomes</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li>-25% dispatcher manual workload</li>
-              <li>-20% missed windows</li>
-              <li>-30% POD-to-invoice cycle time</li>
+          <div style={{ marginTop: "24px", padding: "16px", border: "1px solid var(--border)", borderRadius: "16px" }}>
+            <p className="small" style={{ color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.14em" }}>Pilot target outcomes</p>
+            <ul style={{ marginTop: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
+              <li className="body-md">-25% dispatcher manual workload</li>
+              <li className="body-md">-20% missed windows</li>
+              <li className="body-md">-30% POD-to-invoice cycle time</li>
             </ul>
           </div>
         </aside>

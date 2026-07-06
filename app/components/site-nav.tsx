@@ -1,44 +1,90 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 const links = [
-  { href: "/solutions", label: "Solutions" },
-  { href: "/modules", label: "Modules" },
-  { href: "/integrations", label: "Integrations" },
+  { href: "/demo", label: "Demo" },
+  { href: "/product", label: "Product" },
+  { href: "/ai-brain", label: "AI Brain" },
+  { href: "/case-studies", label: "Customers" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/case-studies", label: "Case Studies" },
 ];
 
 export function SiteNav() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <header className="nav">
-      <div className="nav-inner">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
-            SO
-          </span>
-          <span className="heading-md text-[var(--text)]">ServiceOps AI</span>
-        </Link>
+    <>
+      <header className="nav">
+        <div className="nav-inner">
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{
+              display: "inline-flex",
+              width: "32px",
+              height: "32px",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "50%",
+              background: "var(--accent)",
+              color: "white",
+              fontSize: "11px",
+              fontWeight: "700",
+              letterSpacing: "0.5px",
+            }}>
+              SO
+            </span>
+            <span className="heading-md">ServiceOps AI</span>
+          </Link>
 
-        <nav className="nav-links">
-          {links.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
+          <nav className="nav-links">
+            {links.map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="nav-right">
+            <Link href="/download" className="btn btn-ghost hidden-mobile" style={{ fontSize: "14.5px" }}>
+              Download
             </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <Link href="/download" className="btn btn-ghost hidden md:inline-flex">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Download
-          </Link>
-          <Link href="/book-demo" className="btn btn-primary">
-            Book Demo
-          </Link>
+            <Link href="/login" className="btn btn-ghost" style={{ fontSize: "14.5px" }}>
+              Login
+            </Link>
+            <Link href="/register" className="btn btn-primary" style={{ padding: "10px 24px", fontSize: "14px" }}>
+              Start Free Trial
+            </Link>
+            <button
+              className="nav-hamburger"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
+      </header>
+
+      {/* Mobile menu */}
+      <div className={`nav-mobile ${mobileOpen ? "active" : ""}`}>
+        {links.map((item) => (
+          <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
+            {item.label}
+          </Link>
+        ))}
+        <Link href="/download" onClick={() => setMobileOpen(false)}>
+          Download
+        </Link>
+        <Link href="/login" onClick={() => setMobileOpen(false)}>
+          Login
+        </Link>
+        <Link href="/register" onClick={() => setMobileOpen(false)}>
+          Start Free Trial
+        </Link>
       </div>
-    </header>
+    </>
   );
 }

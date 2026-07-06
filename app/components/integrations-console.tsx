@@ -91,25 +91,20 @@ export function IntegrationsConsole() {
       setError("Company name is required.");
       return;
     }
-
     setCreating(true);
     setError(null);
     setStatus(null);
-
     const response = await fetch("/api/integrations/setup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-
     const data = (await response.json()) as SetupResponse;
-
     if (!response.ok || !data.ok || !data.onboarding) {
       setError(data.message ?? "Could not create integration setup.");
       setCreating(false);
       return;
     }
-
     setCredentials(data.onboarding);
     setStatus("Integration credentials generated. You can now push live sync events.");
     setCreating(false);
@@ -118,11 +113,9 @@ export function IntegrationsConsole() {
 
   const sendTestSync = async () => {
     if (!credentials) return;
-
     setTesting(true);
     setError(null);
     setStatus(null);
-
     const response = await fetch("/api/integrations/tms", {
       method: "POST",
       headers: {
@@ -147,14 +140,12 @@ export function IntegrationsConsole() {
         },
       }),
     });
-
     const data = (await response.json()) as IntegrationStateResponse;
     if (!response.ok || !data.ok) {
       setError(data.message ?? "Could not run test sync.");
       setTesting(false);
       return;
     }
-
     setTestResult(data);
     setStatus("Live sync event accepted. Control Tower state updated.");
     setTesting(false);
@@ -162,24 +153,24 @@ export function IntegrationsConsole() {
   };
 
   return (
-    <div className="space-y-6">
-      <article className="section-frame rounded-3xl p-6 md:p-8">
-        <h3 className="text-2xl font-semibold">Live Integration Setup</h3>
-        <p className="mt-2 text-sm leading-7 text-subtle">
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <article className="section-frame" style={{ padding: "32px" }}>
+        <h3 className="heading-lg">Live Integration Setup</h3>
+        <p className="body-md" style={{ marginTop: "8px", color: "var(--text-muted)" }}>
           Create a carrier integration profile, generate credentials, and push a real sync event into the control tower.
         </p>
 
-        <div className="mt-5 grid gap-3 md:grid-cols-2">
+        <div style={{ marginTop: "20px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
           <input
             value={form.companyName}
             onChange={(event) => update("companyName", event.target.value)}
             placeholder="Carrier company name"
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-input"
           />
           <select
             value={form.countryRegion}
             onChange={(event) => update("countryRegion", event.target.value)}
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-select"
           >
             <option value="Canada">Canada</option>
             <option value="USA">USA</option>
@@ -189,81 +180,74 @@ export function IntegrationsConsole() {
             value={form.tms}
             onChange={(event) => update("tms", event.target.value)}
             placeholder="TMS (McLeod, Trimble TMW, Turvo, etc.)"
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-input"
           />
           <input
             value={form.eld}
             onChange={(event) => update("eld", event.target.value)}
             placeholder="ELD/Telematics (Samsara, Motive, Geotab, etc.)"
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-input"
           />
           <input
             value={form.loadBoard}
             onChange={(event) => update("loadBoard", event.target.value)}
             placeholder="Load source (DAT, Truckstop, broker API, EDI)"
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-input"
           />
           <input
             value={form.billing}
             onChange={(event) => update("billing", event.target.value)}
             placeholder="Billing stack (QuickBooks, Sage, ERP, etc.)"
-            className="rounded-xl border border-[var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none"
+            className="form-input"
           />
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
-          <button
-            onClick={setupConnection}
-            disabled={creating}
-            className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#032d26]"
-          >
+        <div style={{ marginTop: "20px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <button onClick={setupConnection} disabled={creating} className="btn btn-primary">
             {creating ? "Creating..." : "Create Integration Credentials"}
           </button>
-
-          <button
-            onClick={sendTestSync}
-            disabled={!hasCredentials || testing}
-            className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
-          >
+          <button onClick={sendTestSync} disabled={!hasCredentials || testing} className="btn btn-outline">
             {testing ? "Syncing..." : "Send Live Test Sync"}
           </button>
         </div>
 
         {credentials && (
-          <div className="mt-5 rounded-2xl border border-[var(--border)] p-4 text-sm">
-            <p className="font-semibold">Generated credentials (save now)</p>
-            <p className="mt-2 text-subtle">Company ID: {credentials.companyId}</p>
-            <p className="text-subtle break-all">API Key: {credentials.apiKey}</p>
-            <p className="mt-3 text-subtle">Integration endpoint: {credentials.integrationEndpoint}</p>
-            <p className="text-subtle">Headers:</p>
-            <pre className="mt-2 overflow-auto rounded-lg border border-[var(--border)] p-3 text-xs text-subtle">{sampleHeaders}</pre>
+          <div style={{ marginTop: "20px", padding: "16px", borderRadius: "16px", border: "1px solid var(--border)" }}>
+            <p className="body-md" style={{ fontWeight: "600" }}>Generated credentials (save now)</p>
+            <p className="body-md" style={{ marginTop: "8px", color: "var(--text-muted)" }}>Company ID: {credentials.companyId}</p>
+            <p className="body-md" style={{ color: "var(--text-muted)", wordBreak: "break-all" }}>API Key: {credentials.apiKey}</p>
+            <p className="body-md" style={{ marginTop: "12px", color: "var(--text-muted)" }}>Integration endpoint: {credentials.integrationEndpoint}</p>
+            <p className="body-md" style={{ color: "var(--text-muted)" }}>Headers:</p>
+            <pre style={{ marginTop: "8px", overflow: "auto", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", fontSize: "12px", color: "var(--text-muted)" }}>{sampleHeaders}</pre>
           </div>
         )}
 
         {testResult?.state && (
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-            <div className="rounded-xl border border-[var(--border)] p-3">Drivers: {testResult.state.drivers.length}</div>
-            <div className="rounded-xl border border-[var(--border)] p-3">Loads: {testResult.state.loads.length}</div>
-            <div className="rounded-xl border border-[var(--border)] p-3">Approvals: {testResult.state.approvals.length}</div>
-            <div className="rounded-xl border border-[var(--border)] p-3">Outbound: {testResult.state.outbound.length}</div>
+          <div style={{ marginTop: "20px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
+            <div style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>Drivers: {testResult.state.drivers.length}</div>
+            <div style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>Loads: {testResult.state.loads.length}</div>
+            <div style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>Approvals: {testResult.state.approvals.length}</div>
+            <div style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>Outbound: {testResult.state.outbound.length}</div>
           </div>
         )}
 
-        {status && <p className="mt-4 text-sm text-emerald-300">{status}</p>}
-        {error && <p className="mt-4 text-sm text-rose-300">{error}</p>}
+        {status && <p className="body-md" style={{ marginTop: "16px", color: "var(--green)" }}>{status}</p>}
+        {error && <p className="body-md" style={{ marginTop: "16px", color: "var(--red)" }}>{error}</p>}
       </article>
 
-      <article className="section-frame rounded-3xl p-6 md:p-8">
-        <h3 className="text-xl font-semibold">Connected Carriers (Current Runtime)</h3>
-        <div className="mt-4 space-y-2 text-sm">
+      <article className="section-frame" style={{ padding: "32px" }}>
+        <h3 className="heading-lg">Connected Carriers (Current Runtime)</h3>
+        <div style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "8px" }}>
           {connections.length === 0 && (
-            <div className="rounded-xl border border-[var(--border)] p-3 text-subtle">No carrier integrations created yet.</div>
+            <div style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>
+              <p className="body-md" style={{ color: "var(--text-muted)" }}>No carrier integrations created yet.</p>
+            </div>
           )}
           {connections.map((item) => (
-            <div key={item.companyId} className="rounded-xl border border-[var(--border)] p-3">
-              <p className="font-semibold">{item.companyName}</p>
-              <p className="text-subtle">{item.countryRegion} · {item.companyId}</p>
-              <p className="text-subtle">Last event: {item.lastEventAt ? new Date(item.lastEventAt).toLocaleString() : "Not yet"}</p>
+            <div key={item.companyId} style={{ padding: "12px", borderRadius: "12px", border: "1px solid var(--border)" }}>
+              <p className="body-md" style={{ fontWeight: "600" }}>{item.companyName}</p>
+              <p className="body-md" style={{ color: "var(--text-muted)" }}>{item.countryRegion} &middot; {item.companyId}</p>
+              <p className="body-md" style={{ color: "var(--text-muted)" }}>Last event: {item.lastEventAt ? new Date(item.lastEventAt).toLocaleString() : "Not yet"}</p>
             </div>
           ))}
         </div>

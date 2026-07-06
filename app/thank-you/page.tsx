@@ -11,20 +11,20 @@ export default function ThankYouPage() {
       description="Our team will contact you shortly to scope your dispatch exception and billing workflow pilot."
     >
       <ConversionTracker />
-      <article className="section-frame rounded-3xl p-6 md:p-8">
-        <h2 className="text-2xl font-semibold">What to expect next</h2>
-        <ol className="mt-4 space-y-2 text-sm leading-7 text-subtle">
-          <li>1. Intro email with scheduling link.</li>
-          <li>2. 30-minute operations workflow call.</li>
-          <li>3. Pilot KPI baseline and rollout proposal.</li>
+      <article className="section-frame" style={{ padding: "32px" }}>
+        <h2 className="heading-lg">What to expect next</h2>
+        <ol style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "8px" }}>
+          {[
+            "Intro email with scheduling link.",
+            "30-minute operations workflow call.",
+            "Pilot KPI baseline and rollout proposal.",
+          ].map((step, i) => (
+            <li key={step} className="body-md" style={{ color: "var(--text-secondary)" }}>{i + 1}. {step}</li>
+          ))}
         </ol>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/" className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold">
-            Back to Home
-          </Link>
-          <Link href="/case-studies" className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#032d26]">
-            View Case Studies
-          </Link>
+        <div style={{ marginTop: "24px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <Link href="/" className="btn btn-outline">Back to Home</Link>
+          <Link href="/case-studies" className="btn btn-primary">View Case Studies</Link>
         </div>
       </article>
     </SitePage>

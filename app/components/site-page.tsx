@@ -15,15 +15,15 @@ export function SitePage({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[var(--bg)]">
+    <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <SiteNav />
       <main className="section-hero">
         <div className="reveal">
-          <p className="eyebrow mb-4">{eyebrow}</p>
+          <p className="eyebrow" style={{ marginBottom: "16px" }}>{eyebrow}</p>
           <h1 className="display-0">{title}</h1>
-          <p className="body-lg mt-4 max-w-3xl text-[var(--text-secondary)]">{description}</p>
+          <p className="body-lg mt-4" style={{ color: "var(--text-secondary)", maxWidth: "768px" }}>{description}</p>
         </div>
-        <div className="mt-12 space-y-8">{children}</div>
+        <div style={{ marginTop: "48px", display: "flex", flexDirection: "column", gap: "32px" }}>{children}</div>
       </main>
       <SiteFooter />
     </div>

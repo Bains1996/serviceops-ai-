@@ -34,6 +34,9 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const auth = await authorizeOperatorRequest({ request, requiredRole: "DISPATCHER" });
+    if (!auth.ok) return auth.response;
+
     const payload = (await request.json()) as SetupPayload;
 
     if (!isValid(payload)) {

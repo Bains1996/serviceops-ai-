@@ -1,4 +1,8 @@
 import { DispatchState } from "@/lib/dispatch-agent/types";
+import { AgentType, AgentEvent, OrchestrationResult } from "@/lib/dispatch-agent/agents/types";
+import { orchestrateAgents, executeSingleAgent, getAgentInfo, getAgentMemory } from "@/lib/dispatch-agent/agents/orchestrator";
+import { classifyTask, getModelForTask } from "@/lib/ai-brain/model-router";
+import { callWithFailover } from "@/lib/ai-brain/failover";
 
 type AIBrainProvider = "OPENROUTER" | "OPENAI" | "ANTHROPIC";
 
@@ -6,6 +10,17 @@ export type AIBrainGuidance = {
   summary: string;
   actions: string[];
 };
+
+// ── Enhanced AI Brain with Agentic System ────────────────────────────────────
+
+export type AgenticBrainResult = {
+  orchestration: OrchestrationResult;
+  aiGuidance: AIBrainGuidance | null;
+  agentInfo: ReturnType<typeof getAgentInfo>;
+  memory: ReturnType<typeof getAgentMemory>;
+};
+
+// ── Original AI Brain (for external LLM guidance) ────────────────────────────
 
 function normalizeProvider(value: string | undefined): AIBrainProvider {
   const provider = (value ?? "OPENROUTER").trim().toUpperCase();
@@ -194,17 +209,79 @@ export async function generateAIBrainGuidance(input: {
   } else if (provider === "ANTHROPIC") {
     raw = await callAnthropic({ apiKey, model, prompt });
   } else {
-    raw = await callOpenAICompatible({
-      url: process.env.AI_BRAIN_BASE_URL?.trim() || "https://openrouter.ai/api/v1/chat/completions",
-      apiKey,
-      model,
-      prompt,
-      extraHeaders: {
-        "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://serviceops-ai-site.vercel.app",
-        "X-Title": "ServiceOps AI",
-      },
-    });
+    // Smart routing: classify task → pick cheapest capable model → failover on error
+    const complexity = classifyTask(prompt);
+    const systemMsg = "You are a trucking dispatch operations planner. Return strict JSON only.";
+    try {
+      const result = await callWithFailover(complexity, systemMsg, prompt, apiKey);
+      raw = result.content;
+      console.log(`[AIBrain] Model: ${result.model} | Complexity: ${complexity} | Cost: $${((result.inputTokens * 0.15 + result.outputTokens * 0.60) / 1_000_000).toFixed(6)}`);
+    } catch {
+      // Failover exhausted — return null (rule-based only)
+      return null;
+    }
   }
 
   return normalizeGuidance(extractFirstJsonObject(raw));
+}
+
+// ── Agentic Brain (Combined Rule-Based + LLM) ───────────────────────────────
+
+export async function runAgenticBrain(input: {
+  companyId: string;
+  state: DispatchState;
+  event?: AgentEvent;
+}): Promise<AgenticBrainResult> {
+  const { companyId, state, event } = input;
+
+  // Run the 6-agent orchestration system (rule-based)
+  const orchestration = await orchestrateAgents({
+    companyId,
+    state,
+    event,
+  });
+
+  // Optionally get LLM guidance (if enabled)
+  let aiGuidance: AIBrainGuidance | null = null;
+  if (isAIBrainEnabled() && getApiKey()) {
+    try {
+      aiGuidance = await generateAIBrainGuidance({
+        companyId,
+        eventType: event?.type,
+        state,
+      });
+    } catch (error) {
+      console.error("[AIBrain] LLM guidance failed:", error);
+    }
+  }
+
+  return {
+    orchestration,
+    aiGuidance,
+    agentInfo: getAgentInfo(),
+    memory: getAgentMemory(companyId),
+  };
+}
+
+// ── Single Agent Execution ───────────────────────────────────────────────────
+
+export async function runSingleAgent(input: {
+  companyId: string;
+  agentType: AgentType;
+  state: DispatchState;
+  event?: AgentEvent;
+}) {
+  return executeSingleAgent(input);
+}
+
+// ── Agent System Status ──────────────────────────────────────────────────────
+
+export function getAgentSystemStatus() {
+  return {
+    agents: getAgentInfo(),
+    aiBrainEnabled: isAIBrainEnabled(),
+    provider: normalizeProvider(process.env.AI_BRAIN_PROVIDER),
+    model: getModel(normalizeProvider(process.env.AI_BRAIN_PROVIDER)),
+    routing: "3-tier smart routing (simple→Gemini Flash Lite, moderate→GPT-4o-mini, complex→Claude Sonnet)",
+  };
 }
